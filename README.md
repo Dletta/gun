@@ -116,7 +116,8 @@ Thanks to:<br/>
 <a href="https://github.com/dfreire">Dário Freire</a>,
 <a href="http://github.com/velua">John Williamson</a>,
 <a href="http://github.com/finwo">Robin Bron</a>,
-<a href="http://github.com/ElieMakhoul">Elie Makhoul</a>
+<a href="http://github.com/ElieMakhoul">Elie Makhoul</a>,
+<a href="http://github.com/mikestaub">Mike Staub</a>
 </p>
 
  - Join others in sponsoring code: https://www.patreon.com/gunDB !
@@ -193,7 +194,7 @@ var Gun = require('gun/gun');
 
 If you also need to install SEA for user auth and crypto, also install some of its dependencies like this:
 
-`npm install text-encoding node-webcrypto-ossl --save`
+`npm install text-encoding @peculiar/webcrypto --save`
 
 You will need to require it too (it will be automatically added to the Gun object):
 
@@ -232,6 +233,13 @@ now --npm amark/gun
 ```
 
 Then visit the URL in the output of the 'now --npm' step, in your browser.
+
+### [Unebo](https://unubo.app/)
+
+Fork this GUN repo (Unebo only deploys from your own GitHub repo's).  
+Add a Node.js app, select your GUN fork, set `npm start` start as the command and deploy.
+
+Then visit the deployed app by following the 'view app' button, in your browser.
 
 ### [Docker](https://www.docker.com/)
 
