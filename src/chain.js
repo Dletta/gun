@@ -34,7 +34,7 @@ function output(msg){
 				if(obj_has(back, 'put')){
 					back.on('in', back);
 				}
-				if(tmp){ return }
+				if(tmp && u !== back.put){ return } //if(tmp){ return }
 				msg.$ = back.$;
 			} else
 			if(obj_has(back.put, get)){ // TODO: support #LEX !
@@ -56,6 +56,12 @@ function output(msg){
 				if(!Gun.obj.empty(put)){
 					put._ = meta;
 					back.on('in', {$: back.$, put: put, get: back.get})
+				}
+				if(tmp = at.lex){
+					tmp = (tmp._) || (tmp._ = function(){});
+					if(back.ack < tmp.ask){ tmp.ask = back.ack }
+					if(tmp.ask){ return }
+					tmp.ask = 1;
 				}
 			}
 			root.ask(ack, msg);
@@ -247,7 +253,7 @@ function not(at, msg){
 		if(u === tmp && u !== at.put){ return true }
 		neat.put = u;
 		if(neat.ack){
-			neat.ack = -1; // TODO: BUG? Should this be 0?
+			neat.ack = -1; // Shouldn't this be reset to 0? If we do that, SEA test `set user ref should be found` fails, odd.
 		}
 		neat.on('in', {
 			get: key,
@@ -271,7 +277,7 @@ function ask(at, soul){
 	Gun.obj.del(at, 'ask'); // TODO: PERFORMANCE? More elegant way?
 }
 function ack(msg, ev){
-	var as = this.as, get = as.get || empty, at = as.$._, tmp = (msg.put||empty)[get['#']];
+	var as = this.as, get = as.get||'', at = as.$._, tmp = (msg.put||'')[get['#']];
 	if(at.ack){ at.ack = (at.ack + 1) || 1; }
 	if(!msg.put || ('string' == typeof get['.'] && !obj_has(tmp, at.get))){
 		if(at.put !== u){ return }
@@ -287,7 +293,7 @@ function ack(msg, ev){
 		at.on('in', {get: at.get, put: Gun.val.link.ify(get['#']), $: at.$, '@': msg['@']});
 		return;
 	}
-	Gun.on.put(msg, at.root.$);
+	Gun.on.put(msg);
 }
 var empty = {}, u;
 var obj = Gun.obj, obj_has = obj.has, obj_put = obj.put, obj_del = obj.del, obj_to = obj.to, obj_map = obj.map;
